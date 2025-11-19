@@ -20,7 +20,9 @@ struct PlaylistNode {
     PlaylistNode* next;
 
     PlaylistNode(AudioTrack* t) : track(t), next(nullptr) {}
-    ~PlaylistNode() = default;
+    ~PlaylistNode() {
+        // Note: Do NOT delete track here; ownership is managed elsewhere
+    }
 };
 
 class Playlist {
