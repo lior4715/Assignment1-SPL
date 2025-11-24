@@ -86,9 +86,9 @@ AudioTrack& AudioTrack::operator=(const AudioTrack& other) {
         }
     } else {
         waveform_data = nullptr;
-
-    return *this;
     }
+    return *this;
+    
 }
 
 AudioTrack::AudioTrack(AudioTrack&& other) noexcept {
