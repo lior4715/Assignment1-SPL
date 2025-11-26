@@ -142,3 +142,8 @@ void AudioTrack::get_waveform_copy(double* buffer, size_t buffer_size) const {
         std::memcpy(buffer, waveform_data, buffer_size * sizeof(double));
     }
 }
+
+// ADD set_bpm function, אמרו בפורום שמותר
+void AudioTrack::set_bpm(int new_bpm) {
+    bpm = new_bpm;
+}
