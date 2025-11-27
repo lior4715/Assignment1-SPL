@@ -7,7 +7,7 @@
  * TODO: Implement MixingEngineService constructor
  */
 MixingEngineService::MixingEngineService()
-    : active_deck(0)
+    : decks(), active_deck(1), auto_sync(false), bpm_tolerance(0)
 {
     // Your implementation here
     decks[0] = nullptr;
@@ -22,7 +22,7 @@ MixingEngineService::MixingEngineService()
  */
 MixingEngineService::~MixingEngineService() {
     // Your implementation here
-    std::cout << "[MixingEngineService] Cleaning up decks...." << std::endl;
+    std::cout << "[MixingEngineService] Cleaning up decks..." << std::endl;
     for(size_t i = 0; i < 2; i++){
         delete decks[i];
         decks[i] = nullptr;
@@ -97,10 +97,10 @@ void MixingEngineService::displayDeckStatus() const {
  */
 bool MixingEngineService::can_mix_tracks(const PointerWrapper<AudioTrack>& track) const {
     // Your implementation here
-    int bpm_diff = 0;
+    
     if(decks[active_deck] == nullptr || track.get() == nullptr)   return false;
 
-    bpm_diff = std::abs(decks[active_deck]->get_bpm() - track->get_bpm());
+    int bpm_diff = std::abs(decks[active_deck]->get_bpm() - track->get_bpm());
 
     if(bpm_diff <= bpm_tolerance)
         return true;
@@ -124,5 +124,5 @@ void MixingEngineService::sync_bpm(const PointerWrapper<AudioTrack>& track) cons
     else
         track->set_bpm(int(average_bpm));
 
-    std::cout << "[Sync BPM] Syncing BPM from " << activedeck_bpm << " to" << average_bpm << std::endl;
+    std::cout << "[Sync BPM] Syncing BPM from " << newtrack_bpm << " to" << average_bpm << std::endl;
 }
