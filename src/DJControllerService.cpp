@@ -18,22 +18,22 @@ int DJControllerService::loadTrackToCache(AudioTrack& track) {
     }
 
     PointerWrapper<AudioTrack> track_ptr = track.clone();
-
-    if(track_ptr.get() == nullptr){
+    AudioTrack* ptr = track_ptr.release();
+    
+    if(ptr == nullptr){
         std::cout<<"[ERROR] Track: "<<track.get_title()<<" failed to clone and returning appropriate failure code without corrupting cache state"<<std::endl;
         return 0;
     }
-
+    
     track_ptr->load();
     track_ptr->analyze_beatgrid();
-
+    
     /*
-        Could be optimized by moving the pointer directly into the cache
-        but according to the assignment requirements we release and wrap again.
-
+    Could be optimized by moving the pointer directly into the cache
+    but according to the assignment requirements we release and wrap again.
+    
     */
-    AudioTrack* ptr = track_ptr.release();
-    PointerWrapper<AudioTrack> new_wrapper(ptr); 
+   PointerWrapper<AudioTrack> new_wrapper(ptr);
 
     bool eviction = cache.put(std::move(new_wrapper));
 
