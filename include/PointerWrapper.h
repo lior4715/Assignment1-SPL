@@ -63,8 +63,8 @@ public:
      * HINT: How should ownership transfer from one wrapper to another?
      * What should happen to the source wrapper after the move?
      */
-    PointerWrapper(PointerWrapper&& other) noexcept {
-        ptr = other.ptr;
+    PointerWrapper(PointerWrapper&& other) noexcept
+    : ptr(other.ptr) {
         other.ptr = nullptr;
     }
 
@@ -92,7 +92,7 @@ public:
 
     T& operator*() const {
         if(ptr == nullptr) {
-            throw std::runtime_error();
+            throw std::runtime_error("Attempted to access null pointer1"); // Must put string inside parentheses -Lior
         }
         return *ptr;
     };
@@ -104,7 +104,7 @@ public:
      */
     T* operator->() const {
         if(ptr == nullptr) {
-            throw std::runtime_error();
+            throw std::runtime_error("Attempted to access null pointer2"); // Must put string inside parentheses -Lior
         }
         return ptr;
     }
@@ -117,7 +117,7 @@ public:
      */
     T* get() const {
         if(ptr == nullptr) {
-            throw std::runtime_error();
+            throw std::runtime_error("Attempted to access null pointer3"); // Must put string inside parentheses -Lior
         }
         return ptr;
     }

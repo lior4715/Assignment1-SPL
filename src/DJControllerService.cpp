@@ -25,8 +25,8 @@ int DJControllerService::loadTrackToCache(AudioTrack& track) {
         return 0;
     }
     
-    track_ptr->load();
-    track_ptr->analyze_beatgrid();
+    ptr->load();
+    ptr->analyze_beatgrid();
     
     /*
     Could be optimized by moving the pointer directly into the cache

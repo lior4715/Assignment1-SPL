@@ -119,10 +119,7 @@ void MixingEngineService::sync_bpm(const PointerWrapper<AudioTrack>& track) cons
     int newtrack_bpm = track->get_bpm();
     int activedeck_bpm = decks[active_deck]->get_bpm();
     double average_bpm = (newtrack_bpm + activedeck_bpm) / 2.0;
-    if(average_bpm / 1 >= 0.5)
-        track->set_bpm(int(average_bpm) + 1);
-    else
-        track->set_bpm(int(average_bpm));
+    int new_bpm = static_cast<int>(average_bpm + 0.5);
 
-    std::cout << "[Sync BPM] Syncing BPM from " << newtrack_bpm << " to" << average_bpm << std::endl;
+    std::cout << "[Sync BPM] Syncing BPM from " << newtrack_bpm << " to" << new_bpm << std::endl;
 }

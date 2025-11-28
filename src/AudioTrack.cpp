@@ -40,25 +40,20 @@ AudioTrack::~AudioTrack() {
 }
 
 AudioTrack::AudioTrack(const AudioTrack& other)
+    : title(other.title), artists(other.artists), duration_seconds(other.duration_seconds),
+      bpm(other.bpm), waveform_data(nullptr), waveform_size(other.waveform_size)
 {
     // TODO: Implement the copy constructor
     #ifdef DEBUG
     std::cout << "AudioTrack copy constructor called for: " << other.title << std::endl;
     #endif
     // Your code here...
-    title = other.title;
-    artists = other.artists;
-    bpm = other.bpm;
-    waveform_size = other.waveform_size;
-    duration_seconds = other.duration_seconds;
-    
+
     if(waveform_size > 0 && other.waveform_data != nullptr) {
         waveform_data = new double[waveform_size];
-        for(int i = 0; i < waveform_size; ++i) {
+        for(size_t i = 0; i < waveform_size; ++i) {
             waveform_data[i] = other.waveform_data[i];
         }
-    } else {
-        waveform_data = nullptr;
     }
 }
 
@@ -78,9 +73,10 @@ AudioTrack& AudioTrack::operator=(const AudioTrack& other) {
     waveform_size = other.waveform_size;
     duration_seconds = other.duration_seconds;
     delete[] waveform_data;
+
     if(waveform_size > 0 && other.waveform_data != nullptr) {
         waveform_data = new double[waveform_size];
-        for(int i = 0; i < waveform_size; ++i) {
+        for(size_t i = 0; i < waveform_size; ++i) {
             waveform_data[i] = other.waveform_data[i];
         }
     } else {
@@ -90,19 +86,17 @@ AudioTrack& AudioTrack::operator=(const AudioTrack& other) {
     
 }
 
-AudioTrack::AudioTrack(AudioTrack&& other) noexcept {
+AudioTrack::AudioTrack(AudioTrack&& other) noexcept
+    : title(std::move(other.title)), artists(std::move(other.artists)), 
+      duration_seconds(other.duration_seconds), bpm(other.bpm), 
+      waveform_data(other.waveform_data), waveform_size(other.waveform_size)
+ {
     // TODO: Implement the move constructor
     #ifdef DEBUG
     std::cout << "AudioTrack move constructor called for: " << other.title << std::endl;
     #endif
     // Your code here...
-    title = other.title;
-    artists = other.artists;
-    bpm = other.bpm;
-    waveform_size = other.waveform_size;
-    duration_seconds = other.duration_seconds;
-    waveform_data = other.waveform_data;
-
+    
     other.bpm = 0;
     other.waveform_size = 0;
     other.duration_seconds = 0;
