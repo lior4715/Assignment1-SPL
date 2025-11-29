@@ -10,7 +10,7 @@ Playlist::Playlist(const std::string& name)
 // Students must fix this in Phase 1
 Playlist::~Playlist() {
     #ifdef DEBUG
-    std::cout << "Destroying playlist: " << playlist_name << std::endl; ///////AAAAAAAAAAAAAAAAA
+    std::cout << "Destroying playlist: " << playlist_name << std::endl;
     #endif
     while(head){
         delete head->track;
@@ -38,7 +38,6 @@ Playlist& Playlist::operator=(const Playlist& other) {
         return *this;
     }
 
-    // Clear existing tracks
     while (head) {
         delete head->track;
         PlaylistNode* next = head->next;
@@ -49,7 +48,6 @@ Playlist& Playlist::operator=(const Playlist& other) {
     track_count = 0;
     playlist_name = other.playlist_name;
 
-    // Copy tracks from other
     PlaylistNode* current = other.head;
     while (current) {
         PointerWrapper<AudioTrack> track_clone = current->track->clone();
@@ -74,7 +72,6 @@ Playlist& Playlist::operator=(Playlist&& other) noexcept {
         return *this;
     }
 
-    // Clear existing tracks
     while (head) {
         delete head->track;
         PlaylistNode* next = head->next;
@@ -82,17 +79,16 @@ Playlist& Playlist::operator=(Playlist&& other) noexcept {
         head = next;
     }
 
-    // Move data from other
     head = other.head;
     playlist_name = std::move(other.playlist_name);
     track_count = other.track_count;
 
-    // Leave other in a valid state
     other.head = nullptr;
     other.track_count = 0;
 
     return *this;
 }
+
 void Playlist::add_track(AudioTrack* track) {
     if (!track) {
         std::cout << "[Error] Cannot add null track to playlist" << std::endl;

@@ -64,7 +64,7 @@ AudioTrack& AudioTrack::operator=(const AudioTrack& other) {
     #endif
     // Your code here...
     if(this == &other) {
-        return *this; // self-assignment check
+        return *this; 
     }
 
     title = other.title;
@@ -112,7 +112,7 @@ AudioTrack& AudioTrack::operator=(AudioTrack&& other) noexcept {
     // Your code here...
 
     if(this == &other) {
-        return *this; // self-assignment check
+        return *this;
     }
     delete[] waveform_data;
     title = other.title;
@@ -136,7 +136,7 @@ void AudioTrack::get_waveform_copy(double* buffer, size_t buffer_size) const {
     }
 }
 
-// ADD set_bpm function, אמרו בפורום שמותר
+
 void AudioTrack::set_bpm(int new_bpm) {
     bpm = new_bpm;
 }

@@ -54,8 +54,8 @@ int MixingEngineService::loadTrackToDeck(const AudioTrack& track) {
     track_ptr->analyze_beatgrid();
     
 
-    if(decks[active_deck] != nullptr && auto_sync && can_mix_tracks(track_ptr)){ // Implement can_mix_tracks method -Lior
-        sync_bpm(track_ptr); // Implement the sync_bpm method -Lior
+    if(decks[active_deck] != nullptr && auto_sync && can_mix_tracks(track_ptr)){
+        sync_bpm(track_ptr);
     }
 
     decks[target_deck] = track_ptr.release();
@@ -112,7 +112,7 @@ bool MixingEngineService::can_mix_tracks(const PointerWrapper<AudioTrack>& track
  * TODO: Implement sync_bpm method
  * @param track: Track to synchronize with active deck
  */
-void MixingEngineService::sync_bpm(const PointerWrapper<AudioTrack>& track) const { //NOT SURE -Lior בעיה כלשהי עם ההצהרה של הפונקציה להיות const לפי הצ'אט
+void MixingEngineService::sync_bpm(const PointerWrapper<AudioTrack>& track) const { 
     // Your implementation here
     if(decks[active_deck] == nullptr || track.get() == nullptr)
         return;

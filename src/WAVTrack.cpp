@@ -20,31 +20,31 @@ void WAVTrack::load() {
 }
 
 void WAVTrack::analyze_beatgrid() {
-    std::cout << "[WAVTrack::analyze_beatgrid] Analyzing beat grid for: \"" << title << "\"\n";
-    double beats = (duration_seconds / 60.0) * bpm;
-    std::cout << "  → Estimated beats: " << beats << "  → Precision factor: 1 (uncompressed audio)" << std::endl;
     // TODO: Implement WAV-specific beat detection analysis
     // Requirements:
     // 1. Print analysis message with track title
     // 2. Calculate beats: (duration_seconds / 60.0) * bpm
     // 3. Print number of beats and mention uncompressed precision
     // should print "  → Estimated beats: <beats>  → Precision factor: 1.0 (uncompressed audio)"
+    std::cout << "[WAVTrack::analyze_beatgrid] Analyzing beat grid for: \"" << title << "\"\n";
+    double beats = (duration_seconds / 60.0) * bpm;
+    std::cout << "  → Estimated beats: " << beats << "  → Precision factor: 1 (uncompressed audio)" << std::endl;
 }
 
 double WAVTrack::get_quality_score() const {
+    // TODO: Implement WAV quality scoring
+    // NOTE: Use exactly 2 spaces before each arrow (→) character
+    // NOTE: Cast beats to integer when printing
     double base = 70.0;
     if(sample_rate >= 44100) base += 10.0;
     if(sample_rate >= 96000) base += 5.0;
     if(bit_depth >= 16) base += 10.0;
     if(bit_depth >= 24) base += 5.0;
     if(base > 100.0) base = 100.0;
-    // TODO: Implement WAV quality scoring
-    // NOTE: Use exactly 2 spaces before each arrow (→) character
-    // NOTE: Cast beats to integer when printing
-    return base; // Replace with your implementation
+    return base; 
 }
 
 PointerWrapper<AudioTrack> WAVTrack::clone() const {
     // TODO: Implement the clone method
-    return PointerWrapper<AudioTrack>(new WAVTrack(*this)); // Replace with your implementation
+    return PointerWrapper<AudioTrack>(new WAVTrack(*this)); 
 }

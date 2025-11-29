@@ -105,7 +105,6 @@ void DJLibraryService::loadPlaylistFromIndices(const std::string &playlist_name,
                                                const std::vector<int> &track_indices)
 {
     // Your implementation here
-    // For now, add a placeholder to fix the linker error
     int count = 0;
     std::cout << "[INFO] Loading playlist: " << playlist_name << std::endl;
     Playlist new_playlist(playlist_name);
@@ -113,7 +112,7 @@ void DJLibraryService::loadPlaylistFromIndices(const std::string &playlist_name,
     for (int index : track_indices)
     {
         if (index < 1 || static_cast<size_t>(index) > library.size())
-        { // Check casting after
+        {
             std::cout << "[WARNING] Invalid track index: " << index << std::endl;
             continue;
         }

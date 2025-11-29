@@ -14,6 +14,7 @@
 class DJLibraryService {
 public:
     DJLibraryService(const Playlist& playlist);
+    
     DJLibraryService(): playlist(), library(){}
 
     ~DJLibraryService();

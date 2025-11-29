@@ -28,12 +28,7 @@ int DJControllerService::loadTrackToCache(AudioTrack& track) {
     ptr->load();
     ptr->analyze_beatgrid();
     
-    /*
-    Could be optimized by moving the pointer directly into the cache
-    but according to the assignment requirements we release and wrap again.
-    
-    */
-   PointerWrapper<AudioTrack> new_wrapper(ptr);
+    PointerWrapper<AudioTrack> new_wrapper(ptr);
 
     bool eviction = cache.put(std::move(new_wrapper));
 
