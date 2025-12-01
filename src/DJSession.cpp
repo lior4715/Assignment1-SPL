@@ -183,7 +183,7 @@ void DJSession::simulate_dj_performance()
                 playlist_names.push_back(pair.first);
             }
             std::sort(playlist_names.begin(), playlist_names.end());
-
+            
             for (const std::string &playlist_name : playlist_names)
             {
                 if (!load_playlist(playlist_name))
@@ -191,9 +191,20 @@ void DJSession::simulate_dj_performance()
                     std::cerr << "[ERROR] Failed to load playlist: " << playlist_name << std::endl;
                     continue;
                 }
-            }
-        }
+                for (std::string &track_title : track_titles)
+                { 
+                    std::cout << "\n-- Processing: " << track_title << " --" << std::endl;
+                    stats.tracks_processed++;
 
+                    load_track_to_controller(track_title);
+                    load_track_to_mixer_deck(track_title);
+                    controller_service.displayCacheStatus();
+                    mixing_service.displayDeckStatus();
+                }
+            }
+            
+        }
+        
         else
         {
             std::string selected_playlist = display_playlist_menu_from_config();
@@ -207,16 +218,20 @@ void DJSession::simulate_dj_performance()
                 {
                     return;
                 }
-            }
-        }
-        for (std::string &track_title : track_titles)
-        { 
-            std::cout << "\n-- Processing: " << track_title << " --" << std::endl;
-            stats.tracks_processed++;
+                for (std::string &track_title : track_titles)
+                { 
+                    std::cout << "\n-- Processing: " << track_title << " --" << std::endl;
+                    stats.tracks_processed++;
 
-            load_track_to_controller(track_title);
-            load_track_to_mixer_deck(track_title);
+                    load_track_to_controller(track_title);
+                    load_track_to_mixer_deck(track_title);
+                    controller_service.displayCacheStatus();
+                    mixing_service.displayDeckStatus();
+                }
+            }
+            
         }
+        
         if (!play_all)
         {
             char choice;

@@ -68,7 +68,7 @@ int MixingEngineService::loadTrackToDeck(const AudioTrack& track) {
     }
 
     active_deck = target_deck;
-    std::cout << "[Active Deck] Swithced to deck " << active_deck << std::endl;
+    std::cout << "[Active Deck] Switched to deck " << active_deck << std::endl;
     return target_deck;
 }
 
@@ -121,5 +121,5 @@ void MixingEngineService::sync_bpm(const PointerWrapper<AudioTrack>& track) cons
     double average_bpm = (newtrack_bpm + activedeck_bpm) / 2.0;
     int new_bpm = static_cast<int>(average_bpm + 0.5);
 
-    std::cout << "[Sync BPM] Syncing BPM from " << newtrack_bpm << " to" << new_bpm << std::endl;
+    std::cout << "[Sync BPM] Syncing BPM from " << newtrack_bpm << " to " << new_bpm << std::endl;
 }

@@ -130,7 +130,7 @@ void DJLibraryService::loadPlaylistFromIndices(const std::string &playlist_name,
             track_ptr->analyze_beatgrid();
             new_playlist.add_track(track_ptr);
             count++;
-            std::cout << "Added '" << track_ptr->get_title() << "' to playlist '" << playlist_name << "'" << std::endl;
+            //std::cout << "Added '" << track_ptr->get_title() << "' to playlist '" << playlist_name << "'" << std::endl;
         }
     }
     this->playlist = std::move(new_playlist);
