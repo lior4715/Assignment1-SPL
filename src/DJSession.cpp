@@ -170,7 +170,7 @@ void DJSession::simulate_dj_performance()
     std::cout << "Cache Capacity: " << session_config.controller_cache_size << " slots (LRU policy)" << std::endl;
     std::cout << "\n--- Processing Tracks ---" << std::endl;
 
-    std::cout << "TODO: Implement the DJ performance simulation workflow here." << std::endl;
+    //std::cout << "TODO: Implement the DJ performance simulation workflow here." << std::endl;
     // Your implementation here
     bool continue_session = true;
     while (continue_session){
@@ -193,12 +193,12 @@ void DJSession::simulate_dj_performance()
                 }
                 for (std::string &track_title : track_titles)
                 { 
-                    std::cout << "\n-- Processing: " << track_title << " --" << std::endl;
+                    std::cout << "\n--- Processing: " << track_title << " ---" << std::endl;
                     stats.tracks_processed++;
 
                     load_track_to_controller(track_title);
-                    load_track_to_mixer_deck(track_title);
                     controller_service.displayCacheStatus();
+                    load_track_to_mixer_deck(track_title);
                     mixing_service.displayDeckStatus();
                 }
             }
@@ -218,18 +218,17 @@ void DJSession::simulate_dj_performance()
                 {
                     return;
                 }
-                for (std::string &track_title : track_titles)
-                { 
-                    std::cout << "\n-- Processing: " << track_title << " --" << std::endl;
-                    stats.tracks_processed++;
-
-                    load_track_to_controller(track_title);
-                    load_track_to_mixer_deck(track_title);
-                    controller_service.displayCacheStatus();
-                    mixing_service.displayDeckStatus();
-                }
             }
-            
+            for (std::string &track_title : track_titles)
+            { 
+                std::cout << "\n-- Processing: " << track_title << " --" << std::endl;
+                stats.tracks_processed++;
+
+                load_track_to_controller(track_title);
+                controller_service.displayCacheStatus();
+                load_track_to_mixer_deck(track_title);
+                mixing_service.displayDeckStatus();
+            }   
         }
         
         if (!play_all)
