@@ -19,7 +19,7 @@ void MP3Track::load()
               << "\" at " << bitrate << " kbps...\n";
     if (has_id3_tags)
     {
-        std::cout << "  → Processing ID3 metadata (artist, album, etc.)..." << std::endl;
+        std::cout << "  → Processing ID3 metadata (artist info, album art, etc.)..." << std::endl;
     }
     else
     {

@@ -54,18 +54,24 @@ int MixingEngineService::loadTrackToDeck(const AudioTrack& track) {
     track_ptr->analyze_beatgrid();
     
 
-    if(decks[active_deck] != nullptr && auto_sync && can_mix_tracks(track_ptr)){
-        sync_bpm(track_ptr);
+    if(auto_sync) {
+        if(decks[active_deck] != nullptr && can_mix_tracks(track_ptr)){
+            sync_bpm(track_ptr);
+        }
+        else if(decks[active_deck] == nullptr) {
+            std::cout << "[Sync BPM] Cannot sync - one of the decks is empty." << std::endl;
+        }
     }
 
     decks[target_deck] = track_ptr.release();
     std::cout << "[Load Complete] '" << track.get_title() << "' is now loaded on deck " << target_deck << std::endl;
     
-    if(decks[active_deck] != nullptr){
-        std::cout << "[Unload] Unloading previous deck " << active_deck << " (" << decks[active_deck]->get_title() << ")" << std::endl;
-        delete decks[active_deck];
-        decks[active_deck] = nullptr;
-    }
+    //Fast Transition to the loaded deck *Removed after TA update*
+    // if(decks[active_deck] != nullptr){
+    //     std::cout << "[Unload] Unloading previous deck " << active_deck << " (" << decks[active_deck]->get_title() << ")" << std::endl;
+    //     delete decks[active_deck];
+    //     decks[active_deck] = nullptr;
+    // }
 
     active_deck = target_deck;
     std::cout << "[Active Deck] Switched to deck " << active_deck << std::endl;
