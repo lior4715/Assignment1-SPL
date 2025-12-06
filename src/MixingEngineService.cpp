@@ -53,9 +53,10 @@ int MixingEngineService::loadTrackToDeck(const AudioTrack& track) {
     track_ptr->load();
     track_ptr->analyze_beatgrid();
     
-
+    //לא הבנו את זה נכון אז תיקנתי
+    //we need to do sync only if we exceed the tolerance
     if(auto_sync) {
-        if(decks[active_deck] != nullptr && can_mix_tracks(track_ptr)){
+        if(decks[active_deck] != nullptr && !can_mix_tracks(track_ptr)){
             sync_bpm(track_ptr);
         }
         else if(decks[active_deck] == nullptr) {
