@@ -98,7 +98,7 @@ void Playlist::add_track(AudioTrack* track) {
     // Create new node - this allocates memory!
     PlaylistNode* new_node = new PlaylistNode(track);
 
-    if (head == nullptr) {
+    /*if (head == nullptr) {
         head = new_node;
     } else {
         PlaylistNode* current = head;
@@ -106,7 +106,9 @@ void Playlist::add_track(AudioTrack* track) {
             current = current->next;
         }
         current->next = new_node;
-    }
+    }*/
+    new_node->next = head;
+    head = new_node;
     track_count++;
 
     std::cout << "Added '" << track->get_title() << "' to playlist '" 
