@@ -11,7 +11,8 @@ bool LRUCache::contains(const std::string& track_id) const {
 AudioTrack* LRUCache::get(const std::string& track_id) {
     size_t idx = findSlot(track_id);
     if (idx == max_size) return nullptr;
-    return slots[idx].access(access_counter++);
+    access_counter++;
+    return slots[idx].access(access_counter);
 }
 
 /**
@@ -24,7 +25,8 @@ bool LRUCache::put(PointerWrapper<AudioTrack> track) {
     
     if(contains(track->get_title())){
         size_t idx = findSlot(track->get_title());
-        slots[idx].access(access_counter++);
+        access_counter++;
+        slots[idx].access(access_counter);
         return false;
     }
 
@@ -34,8 +36,8 @@ bool LRUCache::put(PointerWrapper<AudioTrack> track) {
     }
     size_t emptySlot = findEmptySlot();
     
+    access_counter++;
     slots[emptySlot].store(std::move(track), access_counter);
-    slots[emptySlot].access(access_counter++);
     return wasFull;
 }
 
