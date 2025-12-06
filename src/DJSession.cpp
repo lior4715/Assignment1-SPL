@@ -239,8 +239,8 @@ void DJSession::simulate_dj_performance()
             if (choice == '0')
                 continue_session = false;
         }
+        print_session_summary();
     }
-    print_session_summary();
 
     stats.tracks_processed = 0;
     stats.transitions = 0;
