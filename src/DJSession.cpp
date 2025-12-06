@@ -231,14 +231,14 @@ void DJSession::simulate_dj_performance()
             }   
         }
         
-        if (!play_all)
+        /*if (!play_all)
         {
             char choice;
             std::cout << "\nDo you want to select another playlist? (0 for Cancel)" << std::endl;
             std::cin >> choice;
             if (choice == '0')
                 continue_session = false;
-        }
+        }*/
         print_session_summary();
     }
 
