@@ -12,6 +12,7 @@ Playlist::~Playlist() {
     #ifdef DEBUG
     std::cout << "Destroying playlist: " << playlist_name << std::endl;
     #endif
+    
     while(head){
         delete head->track;
         PlaylistNode* next = head->next;
