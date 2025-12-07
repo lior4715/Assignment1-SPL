@@ -53,7 +53,6 @@ int MixingEngineService::loadTrackToDeck(const AudioTrack& track) {
     track_ptr->load();
     track_ptr->analyze_beatgrid();
     
-    //לא הבנו את זה נכון אז תיקנתי
     //we need to do sync only if we exceed the tolerance
     if(auto_sync) {
         if(decks[active_deck] != nullptr && !can_mix_tracks(track_ptr)){
@@ -64,6 +63,7 @@ int MixingEngineService::loadTrackToDeck(const AudioTrack& track) {
         }
     }
 
+    delete decks[target_deck];
     decks[target_deck] = track_ptr.release();
     std::cout << "[Load Complete] '" << track.get_title() << "' is now loaded on deck " << target_deck << std::endl;
     
