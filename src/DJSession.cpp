@@ -202,6 +202,7 @@ void DJSession::simulate_dj_performance()
                     load_track_to_mixer_deck(track_title);
                     mixing_service.displayDeckStatus();
                 }
+                print_session_summary();
             }
             
         }
@@ -229,7 +230,8 @@ void DJSession::simulate_dj_performance()
                 controller_service.displayCacheStatus();
                 load_track_to_mixer_deck(track_title);
                 mixing_service.displayDeckStatus();
-            }   
+            }  
+            print_session_summary(); 
         }
         
         /*if (!play_all)
@@ -240,7 +242,7 @@ void DJSession::simulate_dj_performance()
             if (choice == '0')
                 continue_session = false;
         }*/
-        print_session_summary();
+        //print_session_summary();
     }
 
     stats.tracks_processed = 0;
